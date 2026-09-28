@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 감정 일기</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts: Noto Sans KR -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <span class="badge">📖 AI 감정 일기</span>
+      <!-- 1. 제목: 오늘의 하루는 어땠나요? -->
+      <h1 class="title">오늘의 하루는 어땠나요?</h1>
+      <p class="subtitle">오늘 있었던 일이나 마음속 이야기를 자유롭게 남겨보세요.</p>
+    </header>
+
+    <main class="diary-card">
+      <!-- 2. 사용자가 여러 줄의 텍스트를 입력할 수 있는 넓은 입력창(textarea) -->
+      <div class="input-section">
+        <label for="diary-input" class="visually-hidden">일기 입력창</label>
+        <textarea 
+          id="diary-input" 
+          class="diary-textarea" 
+          placeholder="오늘 있었던 일이나 느꼈던 감정을 편안하게 적어보세요...&#10;(예: 오늘 중요한 일을 마쳐서 홀가분하면서도 한편으론 피곤한 하루였다.)"
+          rows="10"
+        ></textarea>
+        <div class="char-count-wrapper">
+          <span id="char-count">0자</span>
+        </div>
+      </div>
+
+      <!-- 3. 입력창 아래의 버튼들: 음성으로 입력하기 / 분석 요청하기 -->
+      <div class="button-group">
+        <button id="voice-btn" class="btn btn-voice" type="button" title="마이크로 음성을 텍스트로 입력합니다">
+          <span class="btn-icon">🎙️</span>
+          <span class="btn-text">음성으로 입력하기</span>
+        </button>
+        <button id="analyze-btn" class="btn btn-analyze" type="button">
+          <span class="btn-icon">✨</span>
+          <span class="btn-text">분석 요청하기</span>
+        </button>
+      </div>
+
+      <!-- 4. 가장 아래: 'AI의 답변' 소제목과 회색 배경의 박스 -->
+      <section class="response-section">
+        <h2 class="response-title">AI의 답변</h2>
+        <div id="ai-response-box" class="ai-response-box">
+          여기에 AI의 답변이 표시됩니다.
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>당신의 소중한 하루를 기록하고 마음을 보듬는 AI 감정 일기</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

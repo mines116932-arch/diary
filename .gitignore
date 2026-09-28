@@ -1,0 +1,12 @@
+# 환경 변수 (API 키 보안 유지)
+.env
+.env.local
+.env.*.local
+
+# 종속성
+node_modules/
+npm-debug.log*
+
+# OS 파일
+.DS_Store
+Thumbs.db

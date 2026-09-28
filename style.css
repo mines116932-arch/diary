@@ -1,0 +1,336 @@
+/* --- 전역 스타일 및 변수 정의 --- */
+:root {
+  --primary-color: #6366f1;
+  --primary-hover: #4f46e5;
+  --secondary-color: #f3f4f6;
+  --secondary-hover: #e5e7eb;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  --card-bg: #ffffff;
+  --response-box-bg: #f3f4f6;
+  --response-box-border: #e5e7eb;
+  --border-radius: 16px;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* --- 메인 컨테이너 --- */
+.container {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* --- 헤더 --- */
+.header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.badge {
+  display: inline-block;
+  background-color: #ede9fe;
+  color: #5b21b6;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+/* --- 일기 작성 카드 --- */
+.diary-card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  padding: 32px;
+  border: 1px solid rgba(229, 231, 235, 0.8);
+}
+
+/* --- 텍스트 입력창 (textarea) --- */
+.input-section {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.diary-textarea {
+  width: 100%;
+  min-height: 220px;
+  padding: 20px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  font-family: inherit;
+  color: var(--text-main);
+  background-color: #fafbfc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  resize: vertical;
+  transition: var(--transition);
+  outline: none;
+}
+
+.diary-textarea:focus {
+  background-color: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+.diary-textarea::placeholder {
+  color: #9ca3af;
+  line-height: 1.6;
+}
+
+.char-count-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* --- 버튼 영역 --- */
+.button-group {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  user-select: none;
+}
+
+/* 음성 입력 버튼 */
+.btn-voice {
+  background-color: #ffffff;
+  color: #374151;
+  border: 1.5px solid #d1d5db;
+}
+
+.btn-voice:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+  color: #111827;
+}
+
+.btn-voice.recording {
+  background-color: #fee2e2;
+  border-color: #ef4444;
+  color: #b91c1c;
+  animation: pulse-recording 1.5s infinite;
+}
+
+@keyframes pulse-recording {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* 분석 요청하기 버튼 */
+.btn-analyze {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+
+.btn-analyze:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-analyze:active {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* --- 하단 AI 답변 영역 --- */
+.response-section {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 24px;
+}
+
+.response-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.response-title::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+/* 회색 배경의 답변 표시 박스 */
+.ai-response-box {
+  background-color: var(--response-box-bg);
+  border: 1px solid var(--response-box-border);
+  border-radius: 12px;
+  padding: 24px;
+  min-height: 120px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #4b5563;
+  transition: var(--transition);
+  word-break: break-word;
+  white-space: pre-line;
+}
+
+.ai-response-box.has-response {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+  color: #1e293b;
+}
+
+/* AI 응답 내 꾸밈 요소 */
+.response-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background-color: #e0e7ff;
+  color: #3730a3;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.response-emotion-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  background: #ede9fe;
+  color: #6d28d9;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.response-body {
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+/* 로딩 스피너 애니메이션 */
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #6366f1;
+  padding: 20px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(99, 102, 241, 0.2);
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- 푸터 --- */
+.footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+/* --- 반응형 모바일 대응 --- */
+@media (max-width: 640px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  .diary-card {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .diary-textarea {
+    min-height: 180px;
+    font-size: 0.98rem;
+  }
+}
