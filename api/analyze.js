@@ -46,8 +46,13 @@ module.exports = async function handler(req, res) {
       }
     };
 
-    // 4. 최신 flash 모델 사용 및 에러 대비 폴백(fallback) 로직
-    const models = ['gemini-2.5-flash', 'gemini-1.5-flash'];
+    // 4. Gemini 모델 폴백 전략 (최신 → 안정 순으로 순차 시도)
+    const models = [
+      'gemini-3.5-flash',
+      'gemini-3.1-flash',
+      'gemini-2.5-flash',
+      'gemini-2.0-flash',
+    ];
     let lastError = null;
 
     for (const model of models) {
