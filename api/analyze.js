@@ -48,10 +48,10 @@ module.exports = async function handler(req, res) {
 
     // 4. Gemini 모델 폴백 전략 (최신 → 안정 순으로 순차 시도)
     const models = [
+      'gemini-3.8-flash',
       'gemini-3.5-flash',
       'gemini-3.1-flash',
       'gemini-2.5-flash',
-      'gemini-2.0-flash',
     ];
     let lastError = null;
 
