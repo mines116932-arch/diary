@@ -71,7 +71,46 @@ module.exports = async function handler(req, res) {
           throw new Error('Gemini로부터 응답 텍스트를 받지 못했습니다.');
         }
 
-        // 5. 프론트엔드로 성공 결과 및 텍스트 응답 전달
+        // ==========================================
+        // 5. Redis 데이터베이스에 저장 로직 추가
+        // ==========================================
+        try {
+          const redisUrl = process.env.REDIS_URL;
+          if (redisUrl) {
+            const Redis = require('ioredis');
+            const redis = new Redis(redisUrl);
+            
+            // 현재 시간을 기준으로 고유한 키(Key) 생성 (예: diary-2022060126123000)
+            const now = new Date();
+            const timestamp = now.getFullYear().toString() +
+                              String(now.getMonth() + 1).padStart(2, '0') +
+                              String(now.getDate()).padStart(2, '0') +
+                              String(now.getHours()).padStart(2, '0') +
+                              String(now.getMinutes()).padStart(2, '0') +
+                              String(now.getSeconds()).padStart(2, '0');
+            // 밀리초를 더해서 완벽한 고유성 보장 방식을 취할 수도 있지만 사용자 요청 예시를 따름
+            const key = `diary-${timestamp}`;
+            
+            const payload = JSON.stringify({
+              originalContent: text.trim(),
+              aiResponse: rawText.trim(),
+              createdAt: now.toISOString()
+            });
+            
+            await redis.set(key, payload);
+            console.log(`[Redis] 성공적으로 저장되었습니다. Key: ${key}`);
+            
+            // 서버리스 환경에서는 연결을 닫아주는 것이 좋습니다.
+            redis.quit();
+          } else {
+            console.warn('[Redis] REDIS_URL 환경변수가 설정되지 않아 저장을 건너뜁니다.');
+          }
+        } catch (redisError) {
+          console.error('[Redis Error] 데이터 저장 중 오류 발생:', redisError);
+          // Redis 에러가 나더라도 사용자에게는 AI 답변을 정상적으로 보여주기 위해 에러를 던지지 않음
+        }
+
+        // 6. 프론트엔드로 성공 결과 및 텍스트 응답 전달
         return res.status(200).json({
           success: true,
           data: {
